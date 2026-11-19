@@ -9,6 +9,17 @@ const assert = require('node:assert/strict');
   try {
     await page.goto('http://127.0.0.1:8000/app.html');
     assert.match((await page.locator('h1').innerText()).replace(/\s+/g, ' ').trim(), /^Bem-vindo de volta, Professor!$/);
+    // Regressão visual: a folha de estilos precisa estar carregada no celular.
+    await page.locator('link[rel="stylesheet"]').evaluate(async link => {
+      const href = link.href;
+      const response = await fetch(href, { cache: 'no-store' });
+      if (!response.ok) throw new Error('CSS indisponível: ' + response.status);
+    });
+    assert.equal(await page.locator('.sidebar').evaluate(el => getComputedStyle(el).display), 'none', 'sidebar desktop deve ficar oculta no celular');
+    assert.equal(await page.locator('.bottom-nav').evaluate(el => getComputedStyle(el).display), 'flex', 'navegação inferior móvel deve aparecer');
+    assert.equal(await page.locator('.quick').evaluate(el => getComputedStyle(el).display), 'grid', 'atalhos devem ser organizados em grade');
+    assert.equal(await page.locator('.quick-card').first().evaluate(el => getComputedStyle(el).textDecorationLine), 'none', 'atalhos não devem parecer links sem estilo');
+    assert.equal(await page.locator('.hero').evaluate(el => getComputedStyle(el).borderTopLeftRadius), '24px', 'banner deve ter cantos arredondados');
     await assert.equal(await page.locator('#count-disc').textContent(), '0');
     await page.locator('#disc-name').fill('Fundamentos de Enfermagem');
     await page.locator('#disc-term').fill('2027.1');
