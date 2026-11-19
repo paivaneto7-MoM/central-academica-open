@@ -54,7 +54,7 @@ const assert = require('node:assert/strict');
     assert.equal(exported.disciplines.length, 1);
     assert.equal(exported.lessons.length, 1);
     assert.equal(exported.tasks.length, 1);
-    await page.locator('#disc-list button').click();
+    await page.locator('#disc-list button').filter({ hasText: 'Excluir' }).click();
     assert.equal(await page.locator('#count-disc').textContent(), '0');
     assert.equal(await page.locator('#count-lessons').textContent(), '0');
     await page.locator('#clear').click();
