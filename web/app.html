@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel docente | Central Acadêmica Open</title>
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="top"><div><span class="eyebrow">CENTRAL ACADÊMICA OPEN</span><h1>Painel docente</h1><p>Planejamento de disciplinas, aulas e atividades em um só lugar.</p></div><a class="back" href="index.html">Sobre o projeto</a></header>
+<main id="conteudo">
+<section class="notice" aria-label="Privacidade"><strong>Dados locais:</strong> os registros ficam neste navegador, neste dispositivo. Não insira dados pessoais ou sensíveis. Limpar os dados do navegador pode apagar os registros.</section>
+<section class="stats" aria-label="Resumo"><article><span>Disciplinas</span><strong id="count-disc">0</strong></article><article><span>Aulas planejadas</span><strong id="count-lessons">0</strong></article><article><span>Tarefas pendentes</span><strong id="count-tasks">0</strong></article></section>
+<div class="columns">
+<section class="panel" aria-labelledby="disciplinas-title"><div class="heading"><div><span class="eyebrow">01 / ORGANIZAÇÃO</span><h2 id="disciplinas-title">Disciplinas</h2></div></div>
+<form id="form-disc"><label for="disc-name">Nome da disciplina</label><input id="disc-name" name="name" required maxlength="100" placeholder="Ex.: Fundamentos de Enfermagem"><label for="disc-term">Período letivo (opcional)</label><input id="disc-term" name="term" maxlength="60" placeholder="Ex.: 2027.1"><button type="submit">Adicionar disciplina</button></form><ul id="disc-list" class="records" aria-live="polite"></ul></section>
+<section class="panel" aria-labelledby="aulas-title"><div class="heading"><div><span class="eyebrow">02 / PLANEJAMENTO</span><h2 id="aulas-title">Aulas</h2></div></div>
+<form id="form-lesson"><label for="lesson-disc">Disciplina</label><select id="lesson-disc" required></select><label for="lesson-title">Tema da aula</label><input id="lesson-title" required maxlength="120" placeholder="Ex.: Segurança do paciente"><label for="lesson-date">Data prevista</label><input id="lesson-date" type="date" required><button type="submit">Planejar aula</button></form><ul id="lesson-list" class="records" aria-live="polite"></ul></section>
+<section class="panel" aria-labelledby="tarefas-title"><div class="heading"><div><span class="eyebrow">03 / ACOMPANHAMENTO</span><h2 id="tarefas-title">Tarefas</h2></div></div>
+<form id="form-task"><label for="task-title">Descrição</label><input id="task-title" required maxlength="140" placeholder="Ex.: Revisar plano de ensino"><label for="task-date">Prazo (opcional)</label><input id="task-date" type="date"><button type="submit">Adicionar tarefa</button></form><ul id="task-list" class="records" aria-live="polite"></ul></section>
+</div>
+<section class="panel utilities"><div><h2>Seus registros</h2><p>Exporte uma cópia JSON dos dados locais ou apague todos os registros deste dispositivo.</p></div><div class="actions"><button id="export" class="secondary" type="button">Exportar JSON</button><button id="clear" class="danger" type="button">Apagar todos os dados</button></div></section>
+<p id="feedback" class="sr-only" role="status" aria-live="polite"></p>
+</main><footer>Central Acadêmica Open · MVP 0.1 · Projeto de código aberto</footer>
+</body></html>
