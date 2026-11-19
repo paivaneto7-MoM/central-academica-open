@@ -39,3 +39,7 @@ Abra [http://127.0.0.1:8000](http://127.0.0.1:8000) no navegador.
 ## Licença
 
 O projeto é distribuído sob a [licença MIT](LICENSE).
+
+## MVP 0.1 — painel docente
+
+Acesse `web/app.html` (ou clique no link da página inicial) para utilizar o painel experimental. É possível cadastrar disciplinas, planejar aulas, registrar tarefas, marcar tarefas como concluídas, excluir registros e exportar os dados em JSON. O armazenamento usa `localStorage` do navegador; não há sincronização, autenticação, importação ou recuperação automática. Não utilize dados pessoais ou sensíveis. Para testar, execute o servidor local descrito acima e abra `http://127.0.0.1:8000/app.html`.
