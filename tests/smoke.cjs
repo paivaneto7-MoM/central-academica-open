@@ -8,7 +8,7 @@ const assert = require('node:assert/strict');
   page.on('pageerror', err => errors.push(err.message));
   try {
     await page.goto('http://127.0.0.1:8000/app.html');
-    await assert.equal(await page.locator('h1').textContent(), 'Painel docente');
+    assert.match((await page.locator('h1').innerText()).replace(/\s+/g, ' ').trim(), /^Bem-vindo de volta, Professor!$/);
     await assert.equal(await page.locator('#count-disc').textContent(), '0');
     await page.locator('#disc-name').fill('Fundamentos de Enfermagem');
     await page.locator('#disc-term').fill('2027.1');
