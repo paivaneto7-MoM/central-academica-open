@@ -1,0 +1,31 @@
+name: Verificações do MVP
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxe JavaScript
+        run: node --check web/assets/js/app.js && node --check tests/smoke.cjs
+      - name: Instalar navegador de teste
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Iniciar servidor local
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 --directory web >/tmp/central-academica-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8000/app.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/central-academica-http.log
+          exit 1
+      - name: Testar funcionalidades no Chromium
+        run: node tests/smoke.cjs
