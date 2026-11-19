@@ -58,6 +58,15 @@
     $('count-disc').textContent = state.disciplines.length;
     $('count-lessons').textContent = state.lessons.length;
     $('count-tasks').textContent = state.tasks.filter(task => !task.done).length;
+    const doneCount = state.tasks.filter(task => task.done).length;
+    const taskCount = state.tasks.length;
+    const percent = taskCount ? Math.round(doneCount / taskCount * 100) : 0;
+    $('count-done').textContent = doneCount;
+    $('count-total-tasks').textContent = taskCount;
+    $('progress-done').textContent = doneCount;
+    $('progress-pending').textContent = taskCount - doneCount;
+    $('progress-percent').textContent = percent + '%';
+    $('progress-ring').style.setProperty('--progress', percent + '%');
     const select = $('lesson-disc'), current = select.value;
     select.replaceChildren();
     const placeholder = el('option', state.disciplines.length ? 'Selecione uma disciplina' : 'Cadastre uma disciplina primeiro');
